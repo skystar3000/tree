@@ -1,12 +1,12 @@
 #include "DJ_Protocol.h"
 #include "t_judgeInformationProcessing.h"
-short addingHeat=500;//waiting for measurement
+short addingHeat=250;//waiting for measurement
 short coolingHeat;
 short limitHeat;
 short judgeHeat;
 void judgeInformationProcessing(uint8_t robot_level,uint16_t robot_remainHP,uint16_t robot_maxHP,uint16_t shoot_heat17)
 {
-    switch(robot_level)
+  switch(robot_level)
 	{
 		case 0:
 			limitHeat = 1200;

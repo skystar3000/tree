@@ -5,12 +5,16 @@ typedef enum shootJudgeState
 {
 	error=0,
 	busy=1,
-	available=2,
-	unavailable=3,
-	ok=4
+	ok=2,
+	unavailable=3
 }shootState_t;
 extern shootState_t shootState;
-#define limitShootWaitTime 100
-extern shootState_t shootJudge(shootState_t shootState, short shootWaitTime);
+extern shootState_t state_shootFunction;
+extern shootState_t state_shootErrorFunction;
+extern int shootWaitTime;
+extern int shootErrorWaitTime;
+#define limitShootWaitTime 200
+#define limitShootErrorWaitTime 500
+extern shootState_t shootJudge(shootState_t shootState, int* shootWaitTime, int* shootErrorWaitTime);
 
 #endif

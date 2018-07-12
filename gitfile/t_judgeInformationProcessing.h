@@ -1,6 +1,5 @@
 #ifndef _t_judgeInformationProcessing_function_
 #define _t_judgeInformationProcessing_function_
-
 #include <stdint.h>
 extern short addingHeat;//or #define
 extern short coolingHeat;
