@@ -29,8 +29,8 @@ void Toggler_ctr(void)
 		state_shootFunction = unavailable;
 		if(shootState != error)
 		{
-	    pid_calc(&pid_Toggler_ang, 0, 0);
-		  pid_calc(&pid_Toggler_spd, moto_toggle.speed_rpm, pid_Toggler_ang.pos_out);
+			pid_calc(&pid_Toggler_ang, 0, 0);
+		  pid_calc(&pid_Toggler_spd, moto_toggle.speed_rpm, 0);
 		}
 	}
 }
@@ -57,7 +57,7 @@ void Toggler_error_ctr(void)
 	  if(shootState != busy)
 		{
 			pid_calc(&pid_Toggler_ang, 0, 0);
-		  pid_calc(&pid_Toggler_spd, moto_toggle.speed_rpm, pid_Toggler_ang.pos_out);
+		  pid_calc(&pid_Toggler_spd, moto_toggle.speed_rpm, 0);
 		}
 	}
 }

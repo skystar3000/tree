@@ -58,48 +58,50 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 		coolingWaitTime++;
 		if(coolingWaitTime%5 == 0)//ÈÈÁ¿¿ØÖÆ
 		{
-			judgeInformationProcessing(ReadData.robot_level, ReadData.robot_remainHP, ReadData.robot_maxHP, ReadData.shoot_heat17);
-			allowShootNum = heatControl(addingHeat, coolingHeat, limitHeat, judgeHeat, &coolingWaitTime);
-			shootState = shootJudge(shootState, &shootWaitTime, &shootErrorWaitTime);
+			judgeInformationProcessing(ReadData.robot_level, ReadData.robot_remainHP, ReadData.robot_maxHP, ReadData.shoot_heat17,
+			                           &limitHeat, &coolingHeat, &judgeHeat);
+			allowShootNum = heatControl(addingHeat, coolingHeat, limitHeat, judgeHeat, 
+			                            &coolingWaitTime, &nowHeat, &shootState);
+			shootState = shootJudge(shootState, &shootWaitTime, &shootErrorWaitTime, &Toggler_ang_set, &moto_toggle);
 		}
 		if(shootState == busy)
 			shootWaitTime++;
 		else if(shootState == error)
 			shootErrorWaitTime++;
 		
-		if(KeyBoard.R)
-		{
-				TIM2->CCR1 = 1200;
-				TIM2->CCR2 = 1200;
-		}
-		if(KeyBoard.F)
-		{
-				TIM2->CCR1 = 1250;
-				TIM2->CCR2 = 1250;
-		}
-		if(KeyBoard.V)
-		{
-				TIM2->CCR1 = 1300;
-				TIM2->CCR2 = 1300;
-		}
+//		if(KeyBoard.R)
+//		{
+//				TIM2->CCR1 = 1200;
+//				TIM2->CCR2 = 1200;
+//		}
+//		if(KeyBoard.F)
+//		{
+//				TIM2->CCR1 = 1250;
+//				TIM2->CCR2 = 1250;
+//		}
+//		if(KeyBoard.V)
+//		{
+//				TIM2->CCR1 = 1300;
+//				TIM2->CCR2 = 1300;
+//		}
 
-		timeof_selfrun++;
-		if(timeof_selfrun==600)
-			stateof_selfsun=1;
-		else if(timeof_selfrun==1200)
-		{
-			stateof_selfsun=2;
-			timeof_selfrun=0;
-		}	
-		if(timeof2312<15000)
-		{
-			timeof2312++;
-			if(timeof2312==10000)
-			{
-				TIM2->CCR1 = 1200;
-				TIM2->CCR2 = 1200;
-			}
-		}
+//		timeof_selfrun++;
+//		if(timeof_selfrun==600)
+//			stateof_selfsun=1;
+//		else if(timeof_selfrun==1200)
+//		{
+//			stateof_selfsun=2;
+//			timeof_selfrun=0;
+//		}	
+//		if(timeof2312<15000)
+//		{
+//			timeof2312++;
+//			if(timeof2312==10000)
+//			{
+//				TIM2->CCR1 = 1200;
+//				TIM2->CCR2 = 1200;
+//			}
+//		}
 		Set_3508_current(&hcan1,Cm3508_spd_pid[0].pos_out,Cm3508_spd_pid[1].pos_out,Cm3508_spd_pid[2].pos_out,Cm3508_spd_pid[3].pos_out); 	
 		Set_6623_current(&hcan1,-(Gm6623_yaw_spd_pid.pos_out),-(Gm6623_pit_spd_pid.pos_out),pid_Toggler_spd.pos_out,0);  
 		 

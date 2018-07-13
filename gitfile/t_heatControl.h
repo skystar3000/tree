@@ -1,8 +1,11 @@
 #ifndef _t_heatControl_function_
 #define _t_heatControl_function_
+#include "t_shootJudge.h"
+
 extern int coolingWaitTime;
 extern short nowHeat;
 extern short allowShootNum;
-extern short heatControl(short addingHeat, short coolingHeat, short limitHeat, short judgeHeat, int* coolingWaitTime);
+extern short heatControl(short addingHeat, short coolingHeat, short limitHeat, short judgeHeat, 
+	                       int* coolingWaitTime, short* nowHeat, shootState_t* shootState);
 
 #endif
